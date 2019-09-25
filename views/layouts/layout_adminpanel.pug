@@ -79,6 +79,13 @@ html(lang="en")
 			}
 
 			/*
+			* Hide Modal
+			*/
+			function hideModal() {
+				jQuery('.closeModal').trigger('click');
+			}
+
+			/*
 			* API URL Variable
 			*/
 			var ApiURL = "#{process.env.API_URL}";
@@ -89,7 +96,7 @@ html(lang="en")
 			function logout() {
 				jQuery.get(ApiURL + '/logout', function(response) {
 					if(response.error == 0) {
-						location.replace('/');
+						location.replace('/login');
 					}
 				});
 			}

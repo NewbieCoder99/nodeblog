@@ -1,0 +1,6 @@
+if(record == 0)
+	option - Category is empty -
+else
+	option(selected="", value="0") - Select Category -
+	each i, index in data
+		option(value="" + data[index].id + "") #{data[index].name}

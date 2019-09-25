@@ -6,9 +6,20 @@ var express = require('express'),
 	route = express.Router();
 
 route.get('/', homeController.index);
+
+/*
+* Articles route
+*/
 route.get('/articles', articlesController.index);
 route.get('/articles/create', articlesController.create);
+/*
+* Categories route
+*/
+route.get('/categories', categoriesController.index);
 route.get('/categories/create', categoriesController.create);
+/*
+* Users route
+*/
 route.get('/users', usersController.index);
 
 module.exports = route;

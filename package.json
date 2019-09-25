@@ -38,6 +38,7 @@
     "sequelize": "^4.44.3",
     "sequelize-cli": "^5.5.1",
     "sequelize-datatable": "^2.0.0",
+    "slug": "^1.1.0",
     "sql-injection": "0.0.6",
     "sqlite3": "^4.1.0",
     "tedious": "^2.6.4",

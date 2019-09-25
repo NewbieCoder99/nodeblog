@@ -1,14 +1,14 @@
-const 	createError            = require('http-errors'),
-        express 			         = require('express'),
-        path                   = require('path'),
-        cookieParser 		       = require('cookie-parser'),
-        logger 				         = require('morgan'),
-        web 				           = require('./routes/web'),
-        dashboard              = require('./routes/dashboard'),
-        api 				           = require('./routes/api'),
-        expressValidator 	     = require('express-validator'),
-        expressSession 		     = require('express-session'),
-        app 				           = express();
+const 	createError = require('http-errors'),
+        express = require('express'),
+        path = require('path'),
+        cookieParser = require('cookie-parser'),
+        logger = require('morgan'),
+        web = require('./routes/web'),
+        dashboard = require('./routes/dashboard'),
+        api = require('./routes/api'),
+        expressValidator = require('express-validator'),
+        expressSession = require('express-session'),
+        app = express();
 
 app.use(logger('dev'));
 app.use(express.json());
