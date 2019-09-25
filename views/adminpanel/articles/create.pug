@@ -15,10 +15,9 @@ block breadcrumb
 block content
 	div.row
 		div.col-lg-8
-			div.card
-				div.card-body
-					form.createForm
-
+			form.createForm(enctype="multipart/form-data")
+				div.card
+					div.card-body
 						div.form-group.row
 							label(for="title", class="col-sm-2 col-form-label v-label") Title <em class="v-red-color-text">*</em>
 							div.col-sm-10
@@ -67,6 +66,12 @@ block content
 									required="required"
 								)
 
+				div.card
+					div.card-body
+						center
+							button.btn.btn-success(type="submit") <i class="fa fa-angle-left"></i> Back
+							button.btn.btn-success#saveButton(type="submit") <i class="fa fa-save"></i> Save
+
 		div.col-lg-4
 			div.card
 				div.card-body
@@ -77,13 +82,7 @@ block content
 							onclick="imageChangeTrigger()",
 							style="cursor:pointer;width:200px;"
 						)
-		div.col-lg-12
-			div.card
-				div.card-body
-					center
-						button.btn.btn-success <i class="fa fa-save"></i> Save
-						button.btn.btn-success <i class="fa fa-edit"></i> Draft
-						button.btn.btn-success <i class="fa fa-trash"></i> Clear
+
 block scripts
 	script(src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote-bs4.js")
 	script.
@@ -168,7 +167,29 @@ block scripts
 				height: 150,
 			});
 
-			jQuery('#saveButton').click(function() {
+			jQuery('.createForm').on('submit', function(e) {
+
+				e.preventDefault();
+
+				jQuery.ajax({
+					url : ApiURL + '/articles/store',
+					method : 'post',
+					dataType : 'json',
+					processData : false,
+					contentType : false,
+					cache : false,
+					dataType : 'json',
+					data : new FormData(this),
+					beforeSend : function() {
+					},
+					success : function() {
+					},
+					error : function() {
+					}
+				});
+			});
+
+			jQuery('#saveModalButton').click(function() {
 				jQuery.ajax({
 					url : ApiURL + '/categories/store',
 					method : 'post',
@@ -183,7 +204,7 @@ block scripts
 					},
 					error : function() {
 					}
-				})
+				});
 			});
 
 		});

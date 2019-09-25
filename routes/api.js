@@ -10,6 +10,7 @@ var express 		= require('express'),
 * Articles route
 */
 route.get('/articles', articlesController.getAll);
+route.post('/articles/store', articlesController.store);
 /*
 * Categories route
 */

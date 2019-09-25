@@ -8,8 +8,12 @@ const 	createError = require('http-errors'),
         api = require('./routes/api'),
         expressValidator = require('express-validator'),
         expressSession = require('express-session'),
+        fileUpload = require('express-fileupload'),
         app = express();
 
+app.use(fileUpload({
+  limits: { fileSize: 50 * 1024 * 1024 },
+}));
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));

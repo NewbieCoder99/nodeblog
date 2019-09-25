@@ -27,3 +27,21 @@ exports.getAll = function(req, res, next) {
 	});
 
 }
+
+exports.store = function(req, res, next) {
+
+	/*
+	* Check Session
+	*/
+	checkSession.test(req,res);
+
+	/*
+	* Check request required
+	*/
+	xhrRequest.test(req,res);
+	res.json({
+		error  	: false,
+		message : "Login berhasil.",
+		result 	: req.files.image
+	});
+}

@@ -11,13 +11,15 @@ body {
 a:focus {
   outline:none;
 }
+
 .v-hero {
-  background:url('https://anerdsworld.com/wp-content/uploads/2018/09/header-web-development-portfolio.jpg');
+  background:url('../img/header.jpg');
   background-size:cover;
   height:470px;
   border-radius: 0;
 }
-.v-menu .active>.nav-link {
+
+.v-menu .active > .nav-link {
   color: #31D183 !important;
   border-bottom: 2px solid #31D183 !important;
 }
@@ -25,6 +27,7 @@ a:focus {
 .v-justify-text {
   text-align:justify;
 }
+
 #v-login {
   background-color:#fff;
   margin-top:2.5%;
