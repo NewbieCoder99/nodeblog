@@ -1,0 +1,70 @@
+extends ../layouts/layout_login
+block content
+	div.form-group
+		center
+			h3.
+				Sign In
+			font.v-welcome-text.
+				Welcome! Please sign in to your account.
+	form.authForm
+		div.form-group
+			label(for="email", class="v-label").
+				Email
+			input(class="form-control v-input", type="email",  name="email", id="email", autocomplete="off")
+		div.form-group
+			label(for="password", class="v-label").
+				Password
+			input(class="form-control v-input", type="password",  name="password", id="password")
+		div.form-group
+			div.row
+				div.col-md-6.col-lg-6.col-xl-6
+					label.v-remember-text
+						<input type="checkbox" name="remember"> Remember Me
+						span
+				div.col-md-6.col-lg-6.col-xl-6
+					a(href="/password/reset", id="v-forgot-password").
+						forgot password?
+		div.form-group
+			button(class="btn btn-primary btn-block", type="button" id="authButton") Sign In
+		div.form-group
+			div.v-login-divider
+				div.v-divider
+					span
+					span OR
+					span
+			center
+				a(href="", class="btn btn-primary")
+					<i class="fab fa-facebook"></i> Sign In With Facebook
+				a(href="", class="btn btn-danger")
+					<i class="fab fa-google"></i> Sign In With Google
+				p
+					small
+						p
+							a(href="", class="v-remember-text") Dont have an account?
+block scripts
+	script(type="text/javascript").
+		var authButton = jQuery('#authButton')
+		authButton.click(function() {
+			jQuery.ajax({
+				url : "/api/login",
+				dataType : 'json',
+				method : 'post',
+				data : jQuery('.authForm').serialize(),
+				beforeSend : function() {
+					authButton.html('Processing ...')
+					authButton.attr('disabled','disabled')
+				},
+				success : function(response) {
+
+					if(!response.error) {
+						location.href = "/dashboard"
+						return
+					}
+
+					vex.dialog.alert(response.message[0])
+
+					authButton.html('Sign In')
+					authButton.removeAttr('disabled','disabled')
+				}
+			})
+		})

@@ -1,0 +1,131 @@
+extends ../../layouts/layout_adminpanel
+
+block styles
+	link(href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote-bs4.css", rel="stylesheet")
+
+block breadcrumb
+	ol.breadcrumb
+		li.breadcrumb-item
+			a(href="/dashboard") Dashboard
+		li.breadcrumb-item
+			a(href="/dashboard/articles") Articles
+		li.breadcrumb-item.active.
+			Create
+
+block content
+	div.row
+		div.col-lg-8
+			div.card
+				div.card-body
+					form.createForm
+
+						div.form-group.row
+							label(for="title", class="col-sm-2 col-form-label v-label") Title <em class="v-red-color-text">*</em>
+							div.col-sm-10
+								input(
+									type="text",
+									class="form-control v-input",
+									id="title",
+									name="title",
+									placeholder="Write your title ...",
+									required="required",
+									autocomplete="off"
+								)
+
+						div.form-group.row
+							label(for="content", class="col-sm-2 col-form-label v-label") Content <em class="v-red-color-text">*</em>
+							div.col-sm-10
+								textarea(
+									class="form-control v-input v-no-resize",
+									id="content",
+									name="content",
+									required="required"
+								)
+
+						div.form-group.row
+							label(for="categoryId", class="col-sm-2 col-form-label v-label") Category <em class="v-red-color-text">*</em>
+							div.col-sm-9
+								select(
+									class="form-control",
+									id="categoryId",
+									name="categoryId",
+									required="required"
+								)
+									option - Select Category -
+							div.col-sm-1
+								button.btn.btn-primary.add-category(type="button") +
+
+						div(class="form-group row", style="display:none;")
+							label(for="image", class="col-sm-2 col-form-label v-label") Image 
+							div.col-sm-10
+								input(
+									type="file",
+									id="image",
+									onchange="imgPreview(this)",
+									name="image",
+									required="required"
+								)
+
+		div.col-lg-4
+			div.card
+				div.card-body
+					center
+						img(
+							src="/assets/img/nophoto.jpg",
+							id="imgPreview",
+							onclick="imageChangeTrigger()",
+							style="cursor:pointer;width:200px;"
+						)
+			div.card
+				div.card-body
+					center
+						button.btn.btn-success <i class="fa fa-save"></i> Save
+						button.btn.btn-success <i class="fa fa-edit"></i> Draft
+						button.btn.btn-success <i class="fa fa-trash"></i> Clear
+block scripts
+	script(src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote-bs4.js")
+	script.
+
+		function imgPreview(input) {
+		  if (input.files && input.files[0]) {
+		    var reader = new FileReader();
+		    reader.onload = function (e) {
+		      jQuery('#imgPreview').attr('src', e.target.result);
+		    }
+		    reader.readAsDataURL(input.files[0]);
+		  }
+		}
+
+		function imageChangeTrigger() {
+			jQuery('#image').trigger('click');
+		}
+
+		jQuery(document).ready(function() {
+
+			jQuery('.add-category').click(function() {
+
+				modalType('modal-xs');
+				modalTitle('Create Category');
+
+				jQuery.ajax({
+					url : '/dashboard/categories/create',
+					dataType : 'html',
+					method : 'get',
+					beforeSend : function() {
+						showModal();
+						modalLoading('modal-xs');
+					},
+					success : function(res) {
+						modalContent(res,'modal-xs');
+					},
+					error : function() {
+					}
+				});
+			});
+
+			jQuery('#content').summernote({
+				placeholder: 'Write your content here ...',
+				height: 150,
+			});
+
+		});

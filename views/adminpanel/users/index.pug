@@ -1,0 +1,48 @@
+extends ../../layouts/layout_adminpanel
+
+block styles
+	include ../../includes/datatables-css
+
+block breadcrumb
+	ol.breadcrumb
+		li.breadcrumb-item
+			a(href="/dashboard") Dashboard
+		li.breadcrumb-item.active.
+			Users
+
+block content
+	div.row
+		div.col-lg-12
+			table#DataTable.table.table-condensed.table-bordered
+				thead
+					tr
+						td(class="text-center") Username
+						td(class="text-center") Email
+				tbody
+
+block scripts
+
+	include ../../includes/datatables-js
+
+	script.
+
+		jQuery('#DataTable').DataTable({
+			ordering : false,
+			processing : false,
+			serverSide : true,
+			buttons : [
+			],
+			columns : [
+				{
+					data : 'username',
+					name : 'username'
+				},
+				{
+					data : 'email',
+					name : 'email'
+				},
+			],
+			ajax : {
+				url : ApiURL + "/users"
+			}
+		});
