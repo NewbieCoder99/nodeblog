@@ -18,7 +18,7 @@ exports.store = function(req, res, next) {
 	xhrRequest.test(req,res);
 
 	/*
-	* Check Categories With Promise
+	* Create Categories With Promise
 	*/
 	var createCategory = new Promise(function(resolve) {
 		model.Categories.create({

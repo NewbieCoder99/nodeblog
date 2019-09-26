@@ -21,10 +21,10 @@ block content
 			table#DataTable.table.table-condensed.table-bordered
 				thead
 					tr
-						td(class="text-center") User
-						td(class="text-center") Category
-						td(class="text-center") Title
-						td(class="text-center") Image
+						td.text-center User
+						td.text-center Category
+						td.text-center Title
+						td.text-center Image
 				tbody
 
 block scripts
@@ -54,7 +54,12 @@ block scripts
 					name : 'title'
 				},
 				{
-					data : 'image',
+					data : function(data) {
+						return `
+							<img src="#{process.env.APP_URL}/assets/img/blogs/`+ data.image +`" style="width:100px;height:100px;">
+						`;
+					},
+					className : 'text-center',
 					name : 'image'
 				},
 			],
