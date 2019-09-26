@@ -4,15 +4,9 @@ const checkSession = require('../../libraries/checkSession');
 const xhrRequest = require('../../libraries/xhrRequest');
 const model = require('../../models');
 const datatable = require(`sequelize-datatable`);
+const Sequelize = require('sequelize');
+const Op = Sequelize.Op;
 const slug = require('slug');
-
-const getData = function(param) {
-	// Todo
-}
-
-const countData = function(param) {
-	// Todo
-}
 
 exports.getAll = function(req, res, next) {
 
@@ -27,12 +21,52 @@ exports.getAll = function(req, res, next) {
 	xhrRequest.test(req,res);
 
 	/*
-	* Sequelize Datatable
+	* Datatable Schema
 	*/
-	datatable(model.Articles, req.query, {
-		// Todo
-	}).then((result) => {
-		return res.json(result);
+	var getArticles = new Promise(function(resolve) {
+
+		var whereLike = {};
+
+		if(req.query.search.value != '') {
+			var whereLike = {
+				title : {
+					[Op.like] : '%' + req.query.search.value + '%'
+				}
+			}
+		}
+
+		console.log(whereLike)
+
+		model.Articles.findAll({
+			include : [
+				{
+					model : model.Categories,
+					attributes : [
+						'name'
+					],
+				},
+				{
+					model : model.User,
+					attributes : [
+						'email',
+						'username'
+					],
+				},
+			],
+			offset : parseInt(req.query.start),
+			limit : parseInt(req.query.length),
+			where : whereLike
+		}).then(callBack => resolve(callBack));
+
+	});
+
+	getArticles.then(function(callBack) {
+		res.json({
+			draw : parseInt(req.query.draw),
+			data : callBack,
+			recordsFiltered : callBack.length,
+			recordsTotal : callBack.length
+		});
 	});
 }
 

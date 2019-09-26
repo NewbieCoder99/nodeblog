@@ -35,18 +35,22 @@ block scripts
 
 		jQuery('#DataTable').DataTable({
 			ordering : false,
-			processing : false,
-			searching : false,
+			processing : true,
+			searching : true,
 			serverSide : true,
 			buttons : [
 			],
 			columns : [
 				{
-					data : 'userId',
+					data : function(data) {
+						return data.User.username;
+					},
 					name : 'userId'
 				},
 				{
-					data : 'categoryId',
+					data : function(data) {
+						return data.Category.name;
+					},
 					name : 'categoryId'
 				},
 				{
