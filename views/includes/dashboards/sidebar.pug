@@ -1,22 +1,19 @@
 nav#sidebar
-
-	ul.list-unstyled#sidebarConstants
-		li(class="")
-			a(href="/dashboard")
-				i.fas.fa-home
-				p.sidebarText Dashboard
-		li(class="")
-			a(href="/dashboard/articles")
-				i.fas.fa-edit
-				p.sidebarText Articles
-		li(class="")
-			a(href="/dashboard/companies")
-				i.fas.fa-building
-				p.sidebarText Companies
-		li(class="")
-			a(href="/dashboard/users")
-				i.fas.fa-users
-				p.sidebarText Users
+	.sidebar-header
+		img(src="/assets/img/logo.png",style="width:150px;height:50px;margin-left:20px;")
+	ul.list-unstyled.components
+		//- li.active
+		//- 	a(href='#homeSubmenu' data-toggle='collapse' aria-expanded='false') Home
+		//- 	ul#homeSubmenu.collapse.list-unstyled
+		//- 		li
+		//- 			a(href='#') Home 1
+		//- 		li
+		//- 			a(href='#') Home 2
+		//- 		li
+		//- 			a(href='#') Home 3
 		li
-			button(type="button", id="sidebarCollapse",class="btn btn-light fixed-bottom")
-				i.fas.fa-align-left
+			a(href="/dashboard") <i class="fa fa-home"></i> Dashboard
+		li
+			a(href="/dashboard/articles") <i class="fa fa-edit"></i> Articles
+		li
+			a(href="/dashboard/users") <i class="fa fa-edit"></i> Users

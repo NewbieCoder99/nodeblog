@@ -6,29 +6,55 @@ html(lang="en")
 		meta(name='viewport', content='width=device-width, initial-scale=1, shrink-to-fit=no')
 		meta(name='description', content='I Love NodeJS')
 		meta(name='author', content='Qudrat Nurfajar Yasin Sutisna')
-		include ../includes/css.pug
+		include ../includes/css
 		block styles
 	body
-		div#header
-			include ../includes/dashboards/navbar.pug
-		div.wrapper
-			include ../includes/dashboards/sidebar.pug
-			div.content
-				nav(aria-label="breadcrumb",style="border-bottom:1px solid #fff;")
-					block breadcrumb
-				div.container-fluid
-					div.v-pb-20
-					block content
+		.wrapper
 
-		include ../includes/js.pug
+			include ../includes/dashboards/sidebar
+
+			#customContent
+
+				include ../includes/dashboards/navbar
+
+				block breadcrumb
+				block content
+
 		include ../includes/modal
+		include ../includes/js
 
 		script.
+
+			jQuery("#sidebarCollapse").on("click", function() {
+				jQuery("#sidebar").toggleClass("active");
+				jQuery(this).toggleClass("active");
+			});
 
 			/*
 			* Vex Options
 			*/
 			vex.defaultOptions.className = 'vex-theme-default';
+
+			/*
+			* API URL Variable
+			*/
+			var ApiURL = "#{process.env.API_URL}";
+
+			/*
+			* Dashboard Url
+			*/
+			var dashboardURL = "#{process.env.APP_URL}/dashboard";
+
+			/*
+			* Show Alert From Toast
+			*/
+			function showToastAlert(params) {
+				if(!params.error) {
+					toastr.success(params.message)
+				} else {
+					toastr.error(params.message)
+				}
+			}
 
 			/*
 			* Overide Modal Type
@@ -84,11 +110,6 @@ html(lang="en")
 			function hideModal() {
 				jQuery('.closeModal').trigger('click');
 			}
-
-			/*
-			* API URL Variable
-			*/
-			var ApiURL = "#{process.env.API_URL}";
 
 			/*
 			* Logout Function

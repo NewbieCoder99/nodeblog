@@ -437,12 +437,13 @@ a:focus {
 
 body.modal-open .wrapper,
 body.modal-open #header {
-/*  -webkit-filter: blur(5px);
+  -webkit-filter: blur(5px);
   -moz-filter: blur(5px);
   -o-filter: blur(5px);
   -ms-filter: blur(5px);
-  filter: blur(5px);*/
+  filter: blur(5px);
 }
+
 .v-input-textarea {
   background-color:#eee;
   border:none;

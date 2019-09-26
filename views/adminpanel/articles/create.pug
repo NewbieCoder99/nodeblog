@@ -62,14 +62,13 @@ block content
 									type="file",
 									id="image",
 									onchange="imgPreview(this)",
-									name="image",
-									required="required"
+									name="image"
 								)
 
 				div.card
 					div.card-body
 						center
-							button.btn.btn-success(type="submit") <i class="fa fa-angle-left"></i> Back
+							a.btn.btn-success(href='/dashboard/articles') <i class="fa fa-angle-left"></i> Back
 							button.btn.btn-success#saveButton(type="submit") <i class="fa fa-save"></i> Save
 
 		div.col-lg-4
@@ -90,13 +89,13 @@ block scripts
 		var categoryId = jQuery('#categoryId');
 
 		function imgPreview(input) {
-		  if (input.files && input.files[0]) {
-		    var reader = new FileReader();
-		    reader.onload = function (e) {
-		      jQuery('#imgPreview').attr('src', e.target.result);
-		    }
-		    reader.readAsDataURL(input.files[0]);
-		  }
+			if (input.files && input.files[0]) {
+				var reader = new FileReader();
+				reader.onload = function (e) {
+					jQuery('#imgPreview').attr('src',e.target.result);
+				}
+				reader.readAsDataURL(input.files[0]);
+			}
 		}
 
 		function imageChangeTrigger() {
@@ -106,7 +105,7 @@ block scripts
 		function getCategories() {
 
 			jQuery.ajax({
-				url : '/dashboard/categories',
+				url : dashboardURL + '/categories',
 				dataType : 'html',
 				beforeSend : function() {
 					categoryId.html(`
@@ -129,7 +128,7 @@ block scripts
 				modalTitle('Create Category');
 
 				jQuery.ajax({
-					url : '/dashboard/categories/create',
+					url : dashboardURL + '/categories/create',
 					dataType : 'html',
 					beforeSend : function() {
 						showModal();
@@ -137,8 +136,6 @@ block scripts
 					},
 					success : function(res) {
 						modalContent(res,'modal-xs');
-					},
-					error : function() {
 					}
 				});
 			});
@@ -154,7 +151,8 @@ block scripts
 							<option value="">Processing ... </option>
 						`);
 					},
-					success : function() {
+					success : function(response) {
+						showToastAlert(response);
 						getCategories();
 					},
 					error : function() {
@@ -165,6 +163,7 @@ block scripts
 			jQuery('#content').summernote({
 				placeholder: 'Write your content here ...',
 				height: 150,
+				dialogsInBody: true
 			});
 
 			jQuery('.createForm').on('submit', function(e) {
@@ -182,9 +181,13 @@ block scripts
 					data : new FormData(this),
 					beforeSend : function() {
 					},
-					success : function() {
-					},
-					error : function() {
+					success : function(response) {
+						showToastAlert(response);
+						if(!response.error) {
+							setTimeout(function() {
+								location.href = dashboardURL + '/articles';
+							}, 1000);
+						}
 					}
 				});
 			});
@@ -198,11 +201,12 @@ block scripts
 					beforeSend : function() {
 						modalLoading();
 					},
-					success : function() {
+					success : function(response) {
+						showToastAlert(response);
 						hideModal();
 						getCategories();
 					},
-					error : function() {
+					error : function(response) {
 					}
 				});
 			});

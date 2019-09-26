@@ -35,8 +35,6 @@ exports.getAll = function(req, res, next) {
 			}
 		}
 
-		console.log(whereLike)
-
 		model.Articles.findAll({
 			include : [
 				{
@@ -55,7 +53,10 @@ exports.getAll = function(req, res, next) {
 			],
 			offset : parseInt(req.query.start),
 			limit : parseInt(req.query.length),
-			where : whereLike
+			where : whereLike,
+			order: [
+				['id','desc']
+			]
 		}).then(callBack => resolve(callBack));
 
 	});
@@ -82,17 +83,20 @@ exports.store = function(req, res, next) {
 	*/
 	xhrRequest.test(req,res);
 
-	let fileImage = req.files.image;
-	let fileName = fileImage.name;
-	let fileMimetype = fileImage.mimetype;
-	let currentSession = JSON.parse(req.session.userdata);
-
+	/*
+	* Check image file is required
+	*/
 	if(!req.files || Object.keys(req.files).length === 0) {
 	  	return res.json({
 	  		error  	: true,
 	  		message : 'Image file is required.'
 	  	});
 	}
+
+	let fileImage = req.files.image;
+	let fileName = fileImage.name;
+	let fileMimetype = fileImage.mimetype;
+	let currentSession = JSON.parse(req.session.userdata);
 
 	if(fileMimetype != 'image/jpeg') {
 		if(fileMimetype != 'image/png') {

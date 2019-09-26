@@ -14,13 +14,14 @@ html(lang="en")
 				font-size:0.9em;
 			}
 	body
-		div.wrapper
-			div.content
-				div.container-fluid
+		section
+			div.container-fluid
+				div.row
 					div.col-lg-4.col-md-4.col-xl-4.col-xs-12.col-sm-12.offset-md-4#v-login
 						block content
 
 		include ../includes/js.pug
+		script(type="text/javascript", src="/assets/js/app.js")
 		script.
 			vex.defaultOptions.className = 'vex-theme-default';
 		block scripts
