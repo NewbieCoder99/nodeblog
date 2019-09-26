@@ -6,6 +6,14 @@ const model = require('../../models');
 const datatable = require(`sequelize-datatable`);
 const slug = require('slug');
 
+const getData = function(param) {
+	// Todo
+}
+
+const countData = function(param) {
+	// Todo
+}
+
 exports.getAll = function(req, res, next) {
 
 	/*
@@ -24,9 +32,8 @@ exports.getAll = function(req, res, next) {
 	datatable(model.Articles, req.query, {
 		// Todo
 	}).then((result) => {
-		res.json(result);
+		return res.json(result);
 	});
-
 }
 
 exports.store = function(req, res, next) {

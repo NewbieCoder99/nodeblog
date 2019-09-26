@@ -38,7 +38,6 @@ module.exports = {
       }
     }).then( ()  => queryInterface.addConstraint('Articles', ['categoryId'], {
         type: 'FOREIGN KEY',
-        name: 'FK_articles_categories',
         references: {
           table: 'Categories',
           field: 'id',
@@ -48,7 +47,6 @@ module.exports = {
       })
     ).then( ()  => queryInterface.addConstraint('Articles', ['userId'], {
         type: 'FOREIGN KEY',
-        name: 'FK_articles_users',
         references: {
           table: 'Users',
           field: 'id',
