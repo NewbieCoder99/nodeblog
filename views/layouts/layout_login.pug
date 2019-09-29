@@ -23,5 +23,21 @@ html(lang="en")
 		include ../includes/js.pug
 		script(type="text/javascript", src="/assets/js/app.js")
 		script.
+
 			vex.defaultOptions.className = 'vex-theme-default';
+
+			jQuery(document).ready(function () {
+			    function disableBack() {
+			        window.history.forward()
+			    }
+
+			    window.onload = disableBack();
+			    window.onpageshow = function (evt) {
+			        if (evt.persisted) {
+			            disableBack()
+			        }
+			    }
+			});
+
 		block scripts
+

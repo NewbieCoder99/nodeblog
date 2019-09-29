@@ -116,9 +116,7 @@ html(lang="en")
 			*/
 			function logout() {
 				jQuery.get(ApiURL + '/logout', function(response) {
-					if(response.error == 0) {
-						location.replace('/login');
-					}
+					window.location.replace('/login');
 				});
 			}
 

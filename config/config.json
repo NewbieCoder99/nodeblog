@@ -1,0 +1,23 @@
+{
+  "development": {
+    "username": "xyind",
+    "password": "xyind12345",
+    "database": "nodeblog",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
+  },
+  "test": {
+    "username": "xyind",
+    "password": "xyind12345",
+    "database": "nodeblog",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
+  },
+  "production": {
+    "username": "root",
+    "password": null,
+    "database": "nodejs",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
+  }
+}
