@@ -6,12 +6,6 @@ block styles
 		body {
 			overflow-x:hidden;
 		}
-		.v-hero-2 {
-			background:#37a000;
-			background-size:cover;
-			height:200px;
-			border-radius: 0;
-		}
 		.twPc-bg {
 		    background-color:#005456;
 		    background-size: 100% auto;
@@ -19,6 +13,7 @@ block styles
 		    width: 100%;
 		    cursor:pointer;
 		    display: block;
+		    margin-top:-40px;
 		}
 block content
 	section
@@ -151,6 +146,7 @@ block content
 															hr
 
 						div.col-xs-12.col-sm-12.col-md-12.col-lg-12
+							div.v-pb-20
 							div.card
 								div.card-header
 									h5.card-title My Location
@@ -169,6 +165,7 @@ block content
 										p.v-black-color-text.
 											#{_dataToJson.profileSettings.profile.availability.capacity.name }
 						div.col-xs-12.col-sm-12.col-md-12.col-lg-12
+							div.v-pb-20
 							div.card
 								div.card-header
 									h5.card-title Profile Link
@@ -178,6 +175,7 @@ block content
 											a(href="https://www.upwork.com/fl/qudratnurfajarys", class="btn btn-success", target="_blank") <i class="fa fa-link"></i> Read More
 
 						div.col-xs-12.col-sm-12.col-md-12.col-lg-12
+							div.v-pb-20
 							div.card
 								div.card-header
 									h5.card-title Skills

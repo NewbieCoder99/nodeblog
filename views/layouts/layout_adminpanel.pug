@@ -1,12 +1,24 @@
 doctype html
 html(lang="en")
 	head
+
 		title #{title}
 		meta(charset='utf-8')
 		meta(name='viewport', content='width=device-width, initial-scale=1, shrink-to-fit=no')
 		meta(name='description', content='I Love NodeJS')
 		meta(name='author', content='Qudrat Nurfajar Yasin Sutisna')
-		include ../includes/css
+
+		link(rel='stylesheet', href='https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700|Roboto:300,400,500,600,700')
+		link(rel='stylesheet', href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css')
+		link(rel='stylesheet', href='/assets/css/main.css')
+		link(rel='stylesheet', href='https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css')
+		link(rel='stylesheet', href='/assets/css/dashboard-custom.css')
+		script(type="text/javascript", src="/assets/vendors/fontawesome-5.9.0/js/all.js")
+		link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/vex-js/4.1.0/css/vex-theme-default.min.css')
+		link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/vex-js/4.1.0/css/vex.min.css')
+		link(href="/assets/css/owl.carousel.min.css", rel="stylesheet")
+		link(href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css", rel="stylesheet")
+
 		block styles
 	body
 		.wrapper

@@ -13,6 +13,7 @@ a:focus {
 }
 
 .v-hero {
+  margin-top:-37px;
   background:url('../img/header.jpg');
   background-size:cover;
   height:470px;
@@ -34,9 +35,11 @@ a:focus {
   border:1px solid #ccc;
   padding:10px 10px 10px 10px;
 }
+
 .v-login-divider {
   margin: 1rem 0 2rem 0
 }
+
 .v-login-divider {
   margin: 1rem 0 2rem 0
 }
