@@ -42,5 +42,7 @@
 	npx sequelize-cli db:migrate
 # Running Seeder
 	npx sequelize-cli db:seed:all
+# Make Seeder
+	npx sequelize-cli seed:generate --name clientsSeeder
 # Generate Migration
-	npx sequelize-cli model:generate --name Table --attributes field1:string,field2:string
+	npx sequelize-cli model:generate --name Projects --attributes clientId:integer,name:string,slug:string,description:text,images:text

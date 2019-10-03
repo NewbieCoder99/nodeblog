@@ -1,5 +1,6 @@
 var express 		= require('express'),
 	articlesController = require('../controllers/api/articlesController'),
+	clientsController = require('../controllers/api/clientsController'),
 	categoriesController = require('../controllers/api/categoriesController'),
 	usersController = require('../controllers/api/usersController'),
 	loginController = require('../controllers/api/loginController'),
@@ -11,6 +12,11 @@ var express 		= require('express'),
 */
 route.get('/articles', articlesController.getAll);
 route.post('/articles/store', articlesController.store);
+/*
+* Clients route
+*/
+route.get('/clients', clientsController.getAll);
+route.post('/clients/store', clientsController.store);
 /*
 * Categories route
 */

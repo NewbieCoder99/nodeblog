@@ -1,0 +1,54 @@
+extends ../../layouts/layout_adminpanel
+
+block styles
+	include ../../includes/datatables-css
+
+block breadcrumb
+	ol.breadcrumb
+		li.breadcrumb-item
+			a(href="/dashboard") Dashboard
+		li.breadcrumb-item.active.
+			Clients
+
+block content
+	div.row
+		div.col-lg-12
+			a(href="articles/create", class="btn btn-primary").
+				+ Create
+			br
+			br
+		div.col-lg-12
+			table#DataTable.table.table-condensed.table-hover
+				thead
+					tr
+						td.text-center(style="width:80%;") Name
+						td.text-center(style="width:20%;") Logo
+				tbody
+
+block scripts
+
+	include ../../includes/datatables-js
+
+	script.
+
+		jQuery('#DataTable').DataTable({
+			ordering : false,
+			processing : true,
+			searching : true,
+			serverSide : true,
+			buttons : [
+			],
+			columns : [
+				{
+					data : 'name',
+					name : 'userId'
+				},
+				{
+					data : 'logo',
+					name : 'logo'
+				}
+			],
+			ajax : {
+				url : ApiURL + "/clients"
+			}
+		});

@@ -1,11 +1,14 @@
 'use strict';
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('Portfolios', {
+    return queryInterface.createTable('Projects', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
+        type: Sequelize.INTEGER
+      },
+      clientId: {
         type: Sequelize.INTEGER
       },
       name: {
@@ -14,26 +17,11 @@ module.exports = {
       slug: {
         type: Sequelize.STRING
       },
-      thumbnail: {
-        type: Sequelize.STRING
-      },
-      descriptions: {
+      description: {
         type: Sequelize.TEXT
       },
-      company: {
-        type: Sequelize.STRING
-      },
-      companyLogo: {
-        type: Sequelize.STRING
-      },
-      developmentDate: {
-        type: Sequelize.DATE
-      },
-      paymentType: {
-        type: Sequelize.STRING // Value use : hourly & fixed price
-      },
-      price: {
-        type: Sequelize.INTEGER
+      images: {
+        type: Sequelize.TEXT
       },
       createdAt: {
         allowNull: false,
@@ -43,9 +31,17 @@ module.exports = {
         allowNull: false,
         type: Sequelize.DATE
       }
-    });
+    }).then( () => queryInterface.addConstraint('Projects', ['clientId'], {
+      type: 'FOREIGN KEY',
+      references: {
+        table: 'Clients',
+        field: 'id',
+      },
+      onDelete: null,
+      onUpdate: null,
+    }));
   },
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('Portfolios');
+    return queryInterface.dropTable('Projects');
   }
 };
